@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Технопарк-Экскурсия</title>
+    <style>
+      #zatemnenie {
+        background-color: #32324E;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+       
+      }
+      #okno {
+        width: 1000px;
+        height: 900px;
+        text-align: center;
+        padding: 15px;
+        border: 3px solid #0000cc;
+        border-radius: 10px;
+        color: #0000cc;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: #fff;
+      }
+      .my-button {
+        position: absolute;
+        top: 80%;
+        right: 83%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 45px 43px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        opacity: 0;
+      }
+      .my-button2 {
+        position: absolute;
+        top: 66%;
+        right: 82%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 45px 43px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        opacity: 0;
+      }
+      #okno2, #okno3 {
+        width: 500px;
+        height: 250px;
+        text-align: center;
+        padding: 15px;
+        border: 3px solid #0000cc;
+        border-radius: 10px;
+        color: #0000cc;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: #fff;
+        display: none;
+      }
+      .my-button3 {
+        position: absolute;
+        top: 100%;
+        right: 40%;
+        transform: translate(-50%, -50%);
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+
+      }
+      .my-button4 {
+        position: absolute;
+        top: 70%;
+        right: 40%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 45px 43px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+
+      }
+      .my-button5 {
+        position: absolute;
+        top: 70%;
+        right: 40%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 45px 43px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+
+      }
+      .my-button6 {
+        position: absolute;
+        top: 70%;
+        right: 40%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 45px 43px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+
+      }
+      .my-button7 {
+        position: absolute;
+        top: 70%;
+        right: 40%;
+        transform: translate(-50%, -50%);
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 45px 43px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+
+      }
+    </style>
+  </head>
+ 
+  <body>
+    <div id="okno">    
+      <img src="image/lvl2.png" width=1000 height=900>
+      <a href="#" class="my-button" onclick="openWindow()"></a>
+      <a href="#" class="my-button2" onclick="openWindow3()"></a>
+    </div>
+    <div id="okno2">
+      второй этаж оформлен под Венеру — на стене вы видите описание и интересные факты о планете. Здесь для резидентов обустроен фуд-корт.<br>
+      А еще по соседству разместилась «Точка кипения» — пространство для бесплатного проведения лекций, собраний, интерактивных мероприятий.<br>
+      <button onclick="navigateToExternalSite2()">Посмотреть</button>
+      <button onclick="closeWindow()">Вернуться</button>
+    </div>
+    <div id="okno3">
+      На третьем этаже в настоящее время размещается Республиканская юношеская библиотека, поэтому со второго этажа мы переходим сразу на четвертый. Почти на каждом уровне IT-парка расположены
+      офисы для компаний.<br>
+      На четвертом этаже, или этаже Марса, есть полезные для резидентов студии: VR-студия, где можно окунуться в виртуальную реальность, а также студия захвата движений, что может понадобиться разработчикам компьютерных игр.<br>
+      Также на этом этаже находится большая кухня, где ребята могут приготовить себе что-нибудь на обед или просто попить кофе. Но самое интересное в ней это маленькая гидропонная установка, в которой можно выращивать зелень сразу на стол.<br>
+      <button onclick="addCoinAndNavigate()">Посмотреть</button>
+      <a href="#" class="my-button3" onclick="closeWindow2()">
+        <img src="image/butclose.png" alt="Кнопка" width=200 height=70>
+    </a>
+    </div>
+
+    <script>
+        var coinCount = localStorage.getItem('coinCount');
+        var db;
+
+  if (!window.indexedDB) {
+    console.log("Ваш браузер не поддерживает IndexedDB.");
+  }
+
+  function addCoinAndNavigate() {
+    coinCount = parseInt(coinCount) + 1;
+    updateCoinCountInDatabase();
+    navigateToExternalSite();
+  }
+
+        function updateCoinCountInDatabase() {
+        var transaction = db.transaction(['coins'], 'readwrite');
+        var objectStore = transaction.objectStore('coins');
+        var putRequest = objectStore.put({ id: 1, count: coinCount });
+      }
+
+      function navigateToExternalSite() {
+        window.open('https://uploads.knightlab.com/scenevr/446/372d3916/index.html', '_blank');
+      }
+      function navigateToExternalSite2() {
+        window.open('https://uploads.knightlab.com/scenevr/446/04702600/index.html', '_blank');
+      }
+      function onButtonClick(){
+        addcoin 
+      }
+
+      var request = indexedDB.open('coinDatabase', 1);
+
+      request.onupgradeneeded = function(event) {
+        db = event.target.result;
+        var objectStore = db.createObjectStore('coins', { keyPath: 'id', autoIncrement: true });
+      };
+
+      request.onsuccess = function(event) {
+        db = event.target.result;
+
+        var transaction = db.transaction(['coins'], 'readonly');
+        var objectStore = transaction.object
+      var putRequest = objectStore.put({ id: 1, count: coinCount });
+    }
+    </script>
+  </div>
+  <script>
+    function closeWindow() {
+      var okno2 = document.getElementById('okno2');
+      okno2.style.display = 'none'; 
+    }
+  
+    function openWindow() {
+      var okno2 = document.getElementById('okno2');
+      okno2.style.display = 'block'; 
+    }
+  
+    function closeWindow2() {
+      var okno3 = document.getElementById('okno3');
+      okno3.style.display = 'none';
+    }
+  
+    function openWindow3() {
+      var okno3 = document.getElementById('okno3');
+      okno3.style.display = 'block';
+    } 
+  
+    if (coinCount >= 2) {
+      window.location.href = 'lvl3.html';
+    }
+  </script>
+   </div>
+  </body>
+</html>

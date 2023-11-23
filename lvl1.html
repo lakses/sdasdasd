@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>технопарк-экскурсия</title>
+    <style>
+      #zatemnenie {
+        background-color: #32324E;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+       
+      }
+      #okno {
+        width: 1000px;
+        height:900px;
+        text-align: center;
+        padding: 15px;
+        border: 3px solid #0000cc;
+        border-radius: 10px;
+        color: #0000cc;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: #fff;
+      }
+	 .my-button {
+            position: absolute;
+            top: 80%;
+            right: 83%;
+            transform: translate(-50%, -50%);
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 45px 43px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+			      opacity: 0;
+        }
+        #okno2 {
+            width: 500px;
+            height: 200px;
+            text-align: center;
+            padding: 15px;
+            border: 3px solid #0000cc;
+            border-radius: 10px;
+            color: #0000cc;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            background: #fff;
+            display: none;
+            }
+        .my-button2 {
+            position: absolute;
+            top: 75%;
+            left: 75%;           
+            transform: translate(-50%, -50%);
+            background-color: rgb(102, 102, 102);
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            }
+        .my-button3 {
+            position: absolute;
+            top: 75%;
+            right: 34%;
+            transform: translate(-50%, -50%);
+            background-color: rgb(90, 90, 90);
+            border: none;
+            color: white;
+            padding: 10px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            }
+		
+    </style>
+  </head>
+ 
+  <body>
+    <div id="zatemnenie">
+	<div id="okno">		
+		<img src="image/lvl1.png" width=1000 height=900>
+		<a href="#" class="my-button" on-click: onclick="openWindow()" ></a>
+    <script>
+    function openWindow() {
+      var okno = document.getElementById('okno');
+      okno2.style.display = 'block';
+      }   
+    </script>
+    <div id="okno2">
+      второй этаж оформлен под Венеру — на стене вы видите описание и интересные факты о планете. Здесь для резидентов обустроен фуд-корт.<br>
+      А еще по соседству разместилась «Точка кипения» — пространство для бесплатного проведения лекций, собраний, интерактивных мероприятий.<br>
+        <a href="#" class="my-button3" onclick="addCoinAndNavigate()">
+            <img src="image/seen.png" alt="Кнопка" width=200 height=70>
+        </a>
+    </button>
+
+      <a href="#" class="my-button2" onclick="closeWindow()">
+        <img src="image/butclose.png" alt="Кнопка" width=200 height=70>
+    </a>  
+    <script>
+          function openWindow() {
+      var okno = document.getElementById('okno');
+      okno2.style.display = 'block';
+      }   
+      function closeWindow() {
+      var okno = document.getElementById('okno');
+      okno2.style.display = 'none';
+      }   
+      var coinCount = 0;
+      var db;
+
+      var request = indexedDB.open('coinDatabase', 1);
+  
+      request.onupgradeneeded = function(event) {
+        db = event.target.result;
+  
+        var objectStore = db.createObjectStore('coins', { keyPath: 'id', autoIncrement: true });
+      };
+  
+      request.onsuccess = function(event) {
+        db = event.target.result;
+  
+        var transaction = db.transaction(['coins'], 'readonly');
+        var objectStore = transaction.objectStore('coins');
+        var getRequest = objectStore.get(1);
+  
+        getRequest.onsuccess = function(event) {
+          if (getRequest.result) {
+            coinCount = getRequest.result.count;
+  
+          }
+        };
+      };
+  
+      function addCoinAndNavigate() {
+        coinCount++;
+  
+  
+        var transaction = db.transaction(['coins'], 'readwrite');
+        var objectStore = transaction.objectStore('coins');
+        var putRequest = objectStore.put({ id: 1, count: coinCount });
+  
+        putRequest.onsuccess = function(event) {
+          if (coinCount >= 1) {
+            window.open('https://uploads.knightlab.com/scenevr/446/04702600/index.html', '_blank');
+            window.location.href = 'lvl2.html';
+          }
+        };
+      }
+      localStorage.setItem('coinCount', coinCount);
+  
+      // function updateCoinCount() {
+      //   document.getElementById('okno').innerText = 'Количество монет: ' + coinCount;
+      // }
+    </script>
+     </div>
+    </div>
+  </body>
+</html>
